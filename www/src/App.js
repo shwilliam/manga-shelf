@@ -1,17 +1,37 @@
 import React from 'react'
-import './global.css'
+import {HashRouter as Router, Link, Route, Switch} from 'react-router-dom'
 import {ApolloContextProvider} from './context'
-import {MangaList, MangaDetails, Read} from './components'
-import {HashRouter as Router, Switch, Route, Link} from 'react-router-dom'
+import {
+  AllMangaList,
+  FavoritesMangaList,
+  MangaDetails,
+  Read,
+} from './components'
+import './global.css'
 
 export const App = () => (
   <ApolloContextProvider>
     <Router>
-      <h1>
-        <Link to="/">Manga Shelf</Link>
-      </h1>
+      <header>
+        <h1>
+          <Link to="/">Manga Shelf</Link>
+        </h1>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/favorites">Favorites</Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
 
       <Switch>
+        <Route path="/favorites">
+          <FavoritesMangaList />
+        </Route>
         <Route path="/read/:id">
           <Read />
         </Route>
@@ -19,7 +39,7 @@ export const App = () => (
           <MangaDetails />
         </Route>
         <Route path="/">
-          <MangaList />
+          <AllMangaList />
         </Route>
       </Switch>
     </Router>

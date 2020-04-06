@@ -1,3 +1,5 @@
+export * from './AllMangaList'
+export * from './FavoritesMangaList'
 export * from './MangaDetails'
 export * from './MangaList'
 export * from './MangaListItem'

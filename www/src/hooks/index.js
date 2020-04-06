@@ -1,5 +1,6 @@
 export * from './useAllMangas'
 export * from './useChapters'
+export * from './useFavoriteMangas'
 export * from './useLocalFavoriteMangas'
 export * from './useLocalStorage'
 export * from './useManga'
