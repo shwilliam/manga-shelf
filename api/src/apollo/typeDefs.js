@@ -1,8 +1,8 @@
 const {gql} = require('apollo-server')
 
-module.exports = gql`
+const typeDefs = gql`
   type Manga {
-    ID: String
+    _id: String
     image: String
     title: String!
     alias: String
@@ -13,10 +13,12 @@ module.exports = gql`
   }
 
   type Query {
-    foo: String
+    mangas: [Manga]
   }
 
   type Schema {
     query: Query
   }
 `
+
+module.exports = {typeDefs}

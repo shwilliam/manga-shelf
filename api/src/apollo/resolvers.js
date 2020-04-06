@@ -1,5 +1,16 @@
-module.exports = {
+const {Manga} = require('../db')
+
+const resolvers = {
   Query: {
-    foo: () => 'bar',
+    mangas: async () =>
+      await Manga.find((e, mangas) => {
+        if (e) {
+          console.error(e)
+          return []
+        }
+        return mangas
+      }),
   },
 }
+
+module.exports = {resolvers}
