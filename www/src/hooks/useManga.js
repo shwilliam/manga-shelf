@@ -8,7 +8,9 @@ export const useManga = id => {
   useEffect(() => {
     setLoading(true)
 
-    fetch(`https://www.mangaeden.com/api/manga/${id}`)
+    fetch(`https://www.mangaeden.com/api/manga/${id}`, {
+      cache: 'force-cache', // FIXME
+    })
       .then(res => res.json())
       .then(setData)
       .catch(e => setError(e))
