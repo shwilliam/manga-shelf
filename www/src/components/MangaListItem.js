@@ -1,8 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-
-const formatDateToString = timestamp =>
-  new Date(Number(`${timestamp}000`)).toLocaleString()
+import {timestampToHumanReadable} from '../utils'
 
 export const MangaListItem = ({data, style}) => (
   <section style={style}>
@@ -10,7 +8,7 @@ export const MangaListItem = ({data, style}) => (
 
     <Link to={`/${data._id}`}>View details</Link>
 
-    <p>{formatDateToString(data.lastUpdated)}</p>
+    <p>{timestampToHumanReadable(data.lastUpdated)}</p>
 
     {data.image && (
       <img src={`${process.env.REACT_APP_CDN_URL}/${data.image}`} alt="" />

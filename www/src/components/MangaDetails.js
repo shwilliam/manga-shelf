@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link, useParams} from 'react-router-dom'
 import {useManga} from '../hooks'
+import {timestampToHumanReadable} from '../utils'
 
 export const MangaDetails = () => {
   const {id} = useParams()
@@ -11,29 +12,29 @@ export const MangaDetails = () => {
   if (!data) return null // FIXME
 
   const {
-    aka,
-    alias,
-    artist,
+    // aka,
+    // alias,
+    // artist,
     author,
-    author_kw,
-    baka,
-    categories,
+    // author_kw,
+    // baka,
+    // categories,
     chapters,
-    chapters_len,
-    created,
+    // chapters_len,
+    // created,
     description,
     hits,
     image,
-    language,
-    last_chapter_data,
-    random,
-    released,
-    startsWith,
+    // language,
+    // last_chapter_data,
+    // random,
+    // released,
+    // startsWith,
     status,
     title,
-    title_kw,
-    type,
-    updatedKeywords,
+    // title_kw,
+    // type,
+    // updatedKeywords,
   } = data
 
   return (
@@ -56,6 +57,7 @@ export const MangaDetails = () => {
         <ol>
           {chapters.map(([number, lastUpdated, title, chapterId]) => (
             <li key={number}>
+              <p>{timestampToHumanReadable(lastUpdated)}</p>
               <p>{title}</p>
               <Link to={`/read/${chapterId}`}>Read</Link>
             </li>
