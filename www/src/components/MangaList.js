@@ -1,7 +1,8 @@
 import React from 'react'
 import {useAllMangas} from '../hooks'
+import {MangaListItem} from './'
 
-export const MangaList = () => {
+export const MangaList = ({onSelect}) => {
   const {loading, error, data} = useAllMangas()
 
   if (loading) return <p>Loading...</p>
@@ -10,9 +11,13 @@ export const MangaList = () => {
   return (
     <ul>
       {data.mangas.map(({_id, title, lastUpdated}) => (
-        <li key={_id}>
-          {title} (updated {lastUpdated})
-        </li>
+        <MangaListItem
+          key={_id}
+          id={_id}
+          title={title}
+          lastUpdated={lastUpdated}
+          onSelect={onSelect}
+        />
       ))}
     </ul>
   )
