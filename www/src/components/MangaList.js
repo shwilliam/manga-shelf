@@ -1,4 +1,5 @@
 import React from 'react'
+import {VariableSizeList as List} from 'react-window'
 import {useAllMangas} from '../hooks'
 import {MangaListItem} from './'
 
@@ -9,15 +10,15 @@ export const MangaList = () => {
   if (error) return <p>Error :(</p>
 
   return (
-    <ul>
-      {data.mangas.map(({_id, title, lastUpdated}) => (
-        <MangaListItem
-          key={_id}
-          id={_id}
-          title={title}
-          lastUpdated={lastUpdated}
-        />
-      ))}
-    </ul>
+    <List
+      height={400}
+      itemCount={data.mangas.length}
+      itemSize={() => 100}
+      width={500}
+    >
+      {({index, style}) => (
+        <MangaListItem style={style} data={data.mangas[index]} />
+      )}
+    </List>
   )
 }
