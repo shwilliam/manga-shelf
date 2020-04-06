@@ -3,7 +3,7 @@ const axios = require('axios')
 const {Manga} = require('./db')
 
 const MANGA_API_BASE_URL = 'https://www.mangaeden.com/api'
-const MANGA_API_ALL_URL = `${MANGA_API_BASE_URL}/list/1/`
+const MANGA_API_ALL_URL = `${MANGA_API_BASE_URL}/list/0/`
 
 const axiosAllManga = axios.create({
   baseURL: MANGA_API_ALL_URL,
