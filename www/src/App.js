@@ -6,6 +6,7 @@ import {
   FavoritesMangaList,
   MangaDetails,
   Read,
+  SearchForm,
 } from './components'
 import './global.css'
 
@@ -39,6 +40,7 @@ export const App = () => (
           <MangaDetails />
         </Route>
         <Route path="/">
+          <SearchForm />
           <AllMangaList />
         </Route>
       </Switch>

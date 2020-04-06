@@ -1,11 +1,6 @@
 import React from 'react'
-import {useLocation} from 'react-router-dom'
-import {useAllMangas} from '../hooks'
+import {useAllMangas, useQuery} from '../hooks'
 import {MangaList} from './'
-
-function useQuery() {
-  return new URLSearchParams(useLocation().search)
-}
 
 export const AllMangaList = () => {
   const urlQuery = useQuery()
