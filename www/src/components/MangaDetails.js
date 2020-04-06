@@ -2,15 +2,13 @@ import React from 'react'
 import {Link, useParams} from 'react-router-dom'
 import {useManga} from '../hooks'
 
-const MANGA_EDEN_IMAGE_BASE_URL = 'https://cdn.mangaeden.com/mangasimg'
-
 export const MangaDetails = () => {
   const {id} = useParams()
   const {loading, error, data} = useManga(id)
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
-  if (!data) return null
+  if (!data) return null // FIXME
 
   const {
     aka,
@@ -40,11 +38,30 @@ export const MangaDetails = () => {
 
   return (
     <article>
-      <h2>{title}</h2>
-      <Link to="/">Back</Link>
-      <p>{description}</p>
+      <header>
+        <h2>{title}</h2>
+        <p>By {author}</p>
+        <Link to="/">Back</Link>
+      </header>
 
-      <img src={`${MANGA_EDEN_IMAGE_BASE_URL}/${image}`} alt="" />
+      <section>
+        <p>{description}</p>
+        {image && (
+          <img src={`${process.env.REACT_APP_CDN_URL}/${image}`} alt="" />
+        )}
+      </section>
+
+      <section>
+        <h3>Chapters</h3>
+        <ol>
+          {chapters.map(([number, lastUpdated, title, chapterId]) => (
+            <li key={number}>
+              <p>{title}</p>
+              <Link to={`/read/${chapterId}`}>Read</Link>
+            </li>
+          ))}
+        </ol>
+      </section>
     </article>
   )
 }

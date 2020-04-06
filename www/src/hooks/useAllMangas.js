@@ -13,6 +13,7 @@ const GET_ALL_MANGAS = gql`
       _id
       title
       lastUpdated
+      image
     }
   }
 `

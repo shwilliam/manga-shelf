@@ -13,7 +13,7 @@ export const MangaList = () => {
     <List
       height={400}
       itemCount={data.mangas.length}
-      itemSize={() => 100}
+      itemSize={() => 200}
       width={500}
     >
       {({index, style}) => (

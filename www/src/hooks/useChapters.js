@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-export const useManga = id => {
+export const useChapters = id => {
   const [data, setData] = useState()
   const [error, setError] = useState()
   const [loading, setLoading] = useState()
@@ -8,7 +8,7 @@ export const useManga = id => {
   useEffect(() => {
     setLoading(true)
 
-    fetch(`${process.env.REACT_APP_MANGA_URL}/manga/${id}`, {
+    fetch(`${process.env.REACT_APP_MANGA_URL}/chapter/${id}`, {
       cache: 'force-cache', // FIXME
     })
       .then(res => res.json())

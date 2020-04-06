@@ -1,7 +1,7 @@
 import React from 'react'
 import './global.css'
 import {ApolloContextProvider} from './context'
-import {MangaList, MangaDetails} from './components'
+import {MangaList, MangaDetails, Read} from './components'
 import {HashRouter as Router, Switch, Route, Link} from 'react-router-dom'
 
 export const App = () => (
@@ -12,6 +12,9 @@ export const App = () => (
       </h1>
 
       <Switch>
+        <Route path="/read/:id">
+          <Read />
+        </Route>
         <Route path="/:id">
           <MangaDetails />
         </Route>
