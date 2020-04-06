@@ -52,6 +52,7 @@ nav ul {
 a:not([class]) {
   /* default styles */
   text-decoration-skip-ink: auto;
+  text-decoration: none;
 }
 
 a,

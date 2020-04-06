@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import {useParams} from 'react-router-dom'
+import {Button, Box, Text, Image} from 'grommet'
+import {Previous, Next} from 'grommet-icons'
 import {useChapters} from '../hooks'
 
 export const Read = () => {
@@ -19,13 +21,15 @@ export const Read = () => {
 
   return (
     <article>
-      <header>
-        <h2>Page: {page}</h2>
-        <button onClick={prevPage}>Previous</button>
-        <button onClick={nextPage}>Next</button>
-      </header>
+      <Box direction="row" justify="center">
+        <Button icon={<Previous />} onClick={prevPage} aria-label="Prev page" />
+        <Text size="medium" weight="bold" alignSelf="center">
+          {page + 1} / {sortedImages.length}
+        </Text>
+        <Button icon={<Next />} onClick={nextPage} aria-label="Next page" />
+      </Box>
 
-      <img src={`${process.env.REACT_APP_CDN_URL}/${path}`} alt="" />
+      <Image src={`${process.env.REACT_APP_CDN_URL}/${path}`} alt="" />
     </article>
   )
 }

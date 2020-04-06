@@ -1,5 +1,6 @@
 import React from 'react'
 import {VariableSizeList as List} from 'react-window'
+import {Box} from 'grommet'
 import {MangaListItem} from './'
 
 export const MangaList = ({loading, error, data}) => {
@@ -8,15 +9,17 @@ export const MangaList = ({loading, error, data}) => {
   if (!data.mangas.length) return <p>Nothing found</p>
 
   return (
-    <List
-      height={400}
-      itemCount={data.mangas.length}
-      itemSize={() => 200}
-      width={500}
-    >
-      {({index, style}) => (
-        <MangaListItem style={style} data={data.mangas[index]} />
-      )}
-    </List>
+    <Box gap="medium" width="full">
+      <List
+        height={400}
+        itemCount={data.mangas.length}
+        itemSize={() => 200}
+        width="100%"
+      >
+        {({index, style}) => (
+          <MangaListItem style={style} data={data.mangas[index]} />
+        )}
+      </List>
+    </Box>
   )
 }
