@@ -2,7 +2,7 @@ import React from 'react'
 import {useAllMangas} from '../hooks'
 import {MangaListItem} from './'
 
-export const MangaList = ({onSelect}) => {
+export const MangaList = () => {
   const {loading, error, data} = useAllMangas()
 
   if (loading) return <p>Loading...</p>
@@ -16,7 +16,6 @@ export const MangaList = ({onSelect}) => {
           id={_id}
           title={title}
           lastUpdated={lastUpdated}
-          onSelect={onSelect}
         />
       ))}
     </ul>

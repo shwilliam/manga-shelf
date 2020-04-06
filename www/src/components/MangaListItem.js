@@ -1,15 +1,12 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
-export const MangaListItem = ({id, title, lastUpdated, onSelect}) => {
-  const handleSelect = () => onSelect(id)
-
-  return (
-    <li>
-      <p>
-        {id}: {title}
-      </p>
-      <p>{lastUpdated}</p>
-      <button onClick={handleSelect}>View details</button>
-    </li>
-  )
-}
+export const MangaListItem = ({id, title, lastUpdated}) => (
+  <li>
+    <p>
+      {id}: {title}
+    </p>
+    <p>{lastUpdated}</p>
+    <Link to={`/${id}`}>View details</Link>
+  </li>
+)

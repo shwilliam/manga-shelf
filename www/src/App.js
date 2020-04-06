@@ -1,21 +1,24 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './global.css'
 import {ApolloContextProvider} from './context'
 import {MangaList, MangaDetails} from './components'
-
-const MangaSelector = () => {
-  const [activeManga, setActiveManga] = useState()
-  const clearActiveManga = () => setActiveManga(null)
-
-  if (activeManga)
-    return <MangaDetails id={activeManga} onClose={clearActiveManga} />
-
-  return <MangaList onSelect={setActiveManga} />
-}
+import {HashRouter as Router, Switch, Route, Link} from 'react-router-dom'
 
 export const App = () => (
   <ApolloContextProvider>
-    <h1>Manga Shelf</h1>
-    <MangaSelector />
+    <Router>
+      <h1>
+        <Link to="/">Manga Shelf</Link>
+      </h1>
+
+      <Switch>
+        <Route path="/:id">
+          <MangaDetails />
+        </Route>
+        <Route path="/">
+          <MangaList />
+        </Route>
+      </Switch>
+    </Router>
   </ApolloContextProvider>
 )
