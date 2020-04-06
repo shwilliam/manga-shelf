@@ -1,17 +1,31 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {timestampToHumanReadable} from '../utils'
+import {useLocalFavoriteMangas} from '../hooks'
 
-export const MangaListItem = ({data, style}) => (
-  <section style={style}>
-    <p>{data.title}</p>
+export const MangaListItem = ({data, style}) => {
+  const [favorites, addFavorite, removeFavorite] = useLocalFavoriteMangas()
+  const isFavorite = favorites.includes(data._id)
 
-    <Link to={`/${data._id}`}>View details</Link>
+  return (
+    <section style={style}>
+      <p>{data.title}</p>
 
-    <p>{timestampToHumanReadable(data.lastUpdated)}</p>
+      <Link to={`/${data._id}`}>View details</Link>
 
-    {data.image && (
-      <img src={`${process.env.REACT_APP_CDN_URL}/${data.image}`} alt="" />
-    )}
-  </section>
-)
+      <p>{timestampToHumanReadable(data.lastUpdated)}</p>
+
+      <button
+        onClick={() =>
+          isFavorite ? removeFavorite(data._id) : addFavorite(data._id)
+        }
+      >
+        {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+      </button>
+
+      {data.image && (
+        <img src={`${process.env.REACT_APP_CDN_URL}/${data.image}`} alt="" />
+      )}
+    </section>
+  )
+}

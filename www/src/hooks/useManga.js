@@ -8,6 +8,7 @@ export const useManga = id => {
   useEffect(() => {
     setLoading(true)
 
+    // TODO: move to server
     fetch(`${process.env.REACT_APP_MANGA_URL}/manga/${id}`, {
       cache: 'force-cache', // FIXME
     })
