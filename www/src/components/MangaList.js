@@ -5,6 +5,7 @@ import {MangaListItem} from './'
 export const MangaList = ({loading, error, data}) => {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
+  if (!data.mangas.length) return <p>Nothing found</p>
 
   return (
     <List

@@ -1,15 +1,15 @@
 import {gql} from 'apollo-boost'
 import {useQuery} from '@apollo/react-hooks'
 
-export const useAllMangas = () => {
-  const {loading, error, data} = useQuery(GET_ALL_MANGAS)
+export const useAllMangas = query => {
+  const {loading, error, data} = useQuery(GET_MANGAS, {variables: {query}})
 
   return {loading, error, data}
 }
 
-const GET_ALL_MANGAS = gql`
-  query getAllMangas {
-    mangas {
+const GET_MANGAS = gql`
+  query getMangas($query: String) {
+    mangas(query: $query) {
       _id
       title
       lastUpdated

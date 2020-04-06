@@ -13,7 +13,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    mangas(favorites: [String]): [Manga]
+    mangas(favorites: [String], query: String): [Manga]
   }
 
   type Schema {
