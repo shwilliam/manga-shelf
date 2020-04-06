@@ -33,26 +33,40 @@ const seed = async () => {
       return mangas
     })
 
+    // TODO: combine filters in single reduce
     const mangasToCreate = mangas.filter(manga => {
       const idx = existingMangas.findIndex(
         existingManga => existingManga._id == manga._id,
       )
 
-      return (
-        idx === -1
-        // || existingMangas[idx].data().lastUpdated !== manga.lastUpdated // TODO: update with new data
+      return idx === -1
+    })
+    const mangasToUpdate = mangas.filter(manga => {
+      const idx = existingMangas.findIndex(
+        existingManga => existingManga._id == manga._id,
       )
+
+      if (idx === -1) return false
+
+      return existingMangas[idx].lastUpdated !== manga.lastUpdated
     })
 
-    await Promise.all(
-      mangasToCreate.map(manga =>
+    await Promise.all([
+      ...mangasToCreate.map(manga =>
         new Manga(manga)
           .save()
           .catch(e => console.error(`Error saving ${manga.title}: ${e}`)),
       ),
-    )
+      ...mangasToUpdate.map(manga =>
+        Manga.findByIdAndUpdate(manga._id, manga).catch(e =>
+          console.error(`Error saving ${manga.title}: ${e}`),
+        ),
+      ),
+    ])
 
-    console.log(`Created ${mangasToCreate.length} manga records`)
+    console.log(
+      `Created ${mangasToCreate.length} & updated ${mangasToUpdate.length} records`,
+    )
   } catch (e) {
     console.error(`Error seeding mangas: ${e}`)
   }
@@ -62,3 +76,5 @@ const seed = async () => {
 cron.schedule('0 * * * *', () => {
   seed()
 })
+
+seed()
