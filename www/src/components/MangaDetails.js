@@ -6,10 +6,15 @@ import {useManga, useLocalChaptersProgress} from '../hooks'
 import {timestampToHumanReadable} from '../utils'
 
 export const MangaDetails = () => {
-  const [chaptersProgress] = useLocalChaptersProgress()
+  const [chaptersProgress, updateProgress] = useLocalChaptersProgress()
   const history = useHistory()
   const {id} = useParams()
   const {loading, error, data} = useManga(id)
+
+  const handleItemClick = e => {
+    history.push(`/read/${e.item[3]}`)
+    updateProgress(e.item, 'IN_PROGRESS')
+  }
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
@@ -72,7 +77,7 @@ export const MangaDetails = () => {
               </Text>
               <Box>
                 {chaptersProgress[chapterId] ? (
-                  chaptersProgress[chapterId] === 'COMPLETE' ? (
+                  chaptersProgress[chapterId].progress === 'COMPLETE' ? (
                     <Checkmark />
                   ) : (
                     <FormView />
@@ -84,7 +89,7 @@ export const MangaDetails = () => {
           secondaryKey={([_, lastUpdated]) => (
             <Text size="small">{timestampToHumanReadable(lastUpdated)}</Text>
           )}
-          onClickItem={e => history.push(`/read/${e.item[3]}`)}
+          onClickItem={handleItemClick}
         />
       </section>
     </article>

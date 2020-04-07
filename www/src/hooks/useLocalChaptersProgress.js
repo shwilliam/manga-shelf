@@ -6,9 +6,18 @@ export const useLocalChaptersProgress = () => {
     {},
   )
 
-  const updateProgress = (progress, id) => {
-    if (!chaptersProgress[id] || chaptersProgress[id] !== 'COMPLETE') {
-      setChaptersProgress(s => ({...s, [id]: progress}))
+  const updateProgress = (chapter, progress) => {
+    if (typeof chapter === 'string') {
+      if (!chaptersProgress[chapter]) return
+      setChaptersProgress(s => ({...s, [chapter]: {...s[chapter], progress}}))
+    } else {
+      setChaptersProgress(s => ({
+        ...s,
+        [chapter[3]]: {
+          progress,
+          title: chapter[2],
+        },
+      }))
     }
   }
 

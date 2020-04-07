@@ -6,24 +6,23 @@ import {useChapters, useLocalChaptersProgress} from '../hooks'
 
 export const Read = () => {
   const {id} = useParams()
-  const [_, updateProgress] = useLocalChaptersProgress()
+  const [chaptersProgress, updateProgress] = useLocalChaptersProgress()
 
   const {loading, error, data} = useChapters(id)
   const [activePage, setActivePage] = useState(0)
   const sortedImages = data?.images.sort(([pageA], [pageB]) => pageA - pageB)
 
   useEffect(() => {
-    if (!sortedImages) return
-
-    if (activePage === sortedImages.length - 1) {
-      updateProgress('COMPLETE', id)
+    if (
+      sortedImages &&
+      activePage === sortedImages.length - 1 &&
+      chaptersProgress[id].progress !== 'COMPLETE'
+    ) {
+      updateProgress(id, 'COMPLETE')
     }
-  }, [activePage, updateProgress, sortedImages, id])
+  }, [activePage, id, sortedImages, updateProgress, chaptersProgress])
 
-  useEffect(() => {
-    updateProgress('IN_PROGRESS', id)
-  }, [id])
-
+  // TODO: scroll to top on page change
   const nextPage = () =>
     setActivePage(s => (s < sortedImages.length - 1 ? s + 1 : s))
   const prevPage = () => setActivePage(s => (s > 0 ? s - 1 : s))
@@ -35,6 +34,7 @@ export const Read = () => {
   const [page, path, width, height] = sortedImages[activePage]
   return (
     <article>
+      {/* TODO: dry up page action buttons */}
       <Box direction="row" justify="center">
         <Button icon={<Previous />} onClick={prevPage} aria-label="Prev page" />
         <Text size="medium" weight="bold" alignSelf="center">
@@ -44,6 +44,14 @@ export const Read = () => {
       </Box>
 
       <Image src={`${process.env.REACT_APP_CDN_URL}/${path}`} alt="" />
+
+      <Box direction="row" justify="center">
+        <Button icon={<Previous />} onClick={prevPage} aria-label="Prev page" />
+        <Text size="medium" weight="bold" alignSelf="center">
+          {page + 1} / {sortedImages.length}
+        </Text>
+        <Button icon={<Next />} onClick={nextPage} aria-label="Next page" />
+      </Box>
     </article>
   )
 }
