@@ -1,10 +1,12 @@
 import React from 'react'
 import {Link, useParams, useHistory} from 'react-router-dom'
-import {List, Text, Heading} from 'grommet'
-import {useManga} from '../hooks'
+import {List, Text, Heading, Box} from 'grommet'
+import {FormView, Checkmark} from 'grommet-icons'
+import {useManga, useLocalChaptersProgress} from '../hooks'
 import {timestampToHumanReadable} from '../utils'
 
 export const MangaDetails = () => {
+  const [chaptersProgress] = useLocalChaptersProgress()
   const history = useHistory()
   const {id} = useParams()
   const {loading, error, data} = useManga(id)
@@ -55,18 +57,29 @@ export const MangaDetails = () => {
         <Heading level={3}>Chapters</Heading>
         <List
           data={chapters}
-          primaryKey={([number, _, title]) => (
-            <Text size="medium" weight="bold">
-              {title && title != number
-                ? title.includes(String(number))
-                  ? title[title.length - 1] === ':'
-                    ? title.slice(0, -1)
-                    : title
-                  : title[title.length - 1] === ':'
-                  ? `${title} ${number}`
-                  : `${title}: ${number}`
-                : number}
-            </Text>
+          primaryKey={([number, _, title, chapterId]) => (
+            <Box direction="row" gap="small" align="center">
+              <Text size="medium" weight="bold">
+                {title && title != number
+                  ? title.includes(String(number))
+                    ? title[title.length - 1] === ':'
+                      ? title.slice(0, -1)
+                      : title
+                    : title[title.length - 1] === ':'
+                    ? `${title} ${number}`
+                    : `${title}: ${number}`
+                  : number}
+              </Text>
+              <Box>
+                {chaptersProgress[chapterId] ? (
+                  chaptersProgress[chapterId] === 'COMPLETE' ? (
+                    <Checkmark />
+                  ) : (
+                    <FormView />
+                  )
+                ) : null}
+              </Box>
+            </Box>
           )}
           secondaryKey={([_, lastUpdated]) => (
             <Text size="small">{timestampToHumanReadable(lastUpdated)}</Text>
