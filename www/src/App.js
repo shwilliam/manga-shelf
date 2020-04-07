@@ -1,7 +1,8 @@
 import React from 'react'
 import {HashRouter as Router, Link, Route, Switch} from 'react-router-dom'
-import {Grommet, Box, Header, Heading, Main} from 'grommet'
+import {Grommet, Box, Header, Heading, Main, Text} from 'grommet'
 import {aruba} from 'grommet/themes'
+import {Catalog} from 'grommet-icons'
 import {ApolloContextProvider} from './context'
 import {
   AllMangaList,
@@ -17,9 +18,16 @@ export const App = () => (
   <ApolloContextProvider>
     <Grommet theme={aruba}>
       <Router>
-        <Header background="light-2">
+        <Header border="bottom">
           <Heading size="medium" level={1} margin="medium">
-            <Link to="/">Manga Shelf</Link>
+            <Link to="/">
+              <Box direction="row" align="center">
+                <Catalog size="large" />
+                <Text className="site-title" margin="medium" size="large">
+                  Manga Shelf
+                </Text>
+              </Box>
+            </Link>
           </Heading>
 
           <Box

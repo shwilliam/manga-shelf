@@ -12,6 +12,7 @@ const GET_MANGAS = gql`
     mangas(query: $query) {
       _id
       title
+      status
       lastUpdated
       image
     }

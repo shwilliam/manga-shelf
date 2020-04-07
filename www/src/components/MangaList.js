@@ -9,7 +9,7 @@ export const MangaList = ({loading, error, data}) => {
   if (!data.mangas.length) return <p>Nothing found</p>
 
   return (
-    <Box gap="medium" width="full">
+    <Box gap="medium" width="large" align="center">
       <List
         height={400}
         itemCount={data.mangas.length}

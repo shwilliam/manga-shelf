@@ -16,6 +16,7 @@ const GET_FAVORITE_MANGAS = gql`
     mangas(favorites: $favorites) {
       _id
       title
+      status
       lastUpdated
       image
     }
