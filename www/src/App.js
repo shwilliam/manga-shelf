@@ -9,6 +9,7 @@ import {
   MangaDetails,
   Read,
   SearchForm,
+  LocalChapterList,
 } from './components'
 import './global.css'
 
@@ -35,6 +36,7 @@ export const App = () => (
             <Box direction="row" gap="medium" pad="small" as="nav">
               <Link to="/">Browse</Link>
               <Link to="/favorites">Favorites</Link>
+              <Link to="/progress">Progress</Link>
             </Box>
           </Box>
         </Header>
@@ -45,6 +47,9 @@ export const App = () => (
               <Route path="/favorites">
                 <Heading level={2}>Favorites</Heading>
                 <FavoritesMangaList />
+              </Route>
+              <Route path="/progress">
+                <LocalChapterList />
               </Route>
               <Route path="/read/:id">
                 <Read />
