@@ -1,4 +1,3 @@
-const cron = require('node-cron')
 const axios = require('axios')
 const {Manga} = require('./db')
 
@@ -67,14 +66,11 @@ const seed = async () => {
     console.log(
       `Created ${mangasToCreate.length} & updated ${mangasToUpdate.length} records`,
     )
+    return 1
   } catch (e) {
     console.error(`Error seeding mangas: ${e}`)
+    return 0
   }
 }
 
-// hourly
-cron.schedule('0 * * * *', () => {
-  seed()
-})
-
-seed()
+module.exports = {seed}
