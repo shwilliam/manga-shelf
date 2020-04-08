@@ -50,10 +50,12 @@ export const App = () => (
         </Header>
 
         <Main>
-          <Box align="center" justify="start" pad="large">
+          <Box align="center" justify="start" pad="medium">
             <Switch>
               <Route path="/favorites">
-                <Heading level={2}>Favorites</Heading>
+                <Heading level={2} margin="large">
+                  Favorites
+                </Heading>
                 <FavoritesMangaList />
               </Route>
               <Route path="/progress">
@@ -66,7 +68,9 @@ export const App = () => (
                 <MangaDetails />
               </Route>
               <Route path="/">
-                <Heading level={2}>Browse</Heading>
+                <Heading level={2} margin="large">
+                  Browse
+                </Heading>
                 <AllMangaList />
               </Route>
             </Switch>

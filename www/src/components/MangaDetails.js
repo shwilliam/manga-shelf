@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link, useParams, useHistory} from 'react-router-dom'
 import {List, Text, Heading, Box, Image} from 'grommet'
-import {FormView, Checkmark} from 'grommet-icons'
+import {FormView, Checkmark, LinkPrevious} from 'grommet-icons'
 import {useManga, useLocalChaptersProgress} from '../hooks'
 import {timestampToHumanReadable} from '../utils'
 
@@ -54,7 +54,8 @@ export const MangaDetails = () => {
             <Box
               width="small"
               flex={{shrink: 0}}
-              style={{marginBottom: '75px'}}
+              className="pad-bottom--large"
+              pad="small"
             >
               <Image
                 fill="contain"
@@ -65,12 +66,17 @@ export const MangaDetails = () => {
             </Box>
           )}
           <Box gap="medium" width={{max: 'large'}}>
-            <Link to="/">&lt; Back</Link>
+            <Link to="/">
+              <LinkPrevious size="small" />
+              <Text color="dark-3" margin="small">
+                Back
+              </Text>
+            </Link>
             <Heading level={2}>{title}</Heading>
             <Text>By {author}</Text>
             <Text
               dangerouslySetInnerHTML={{__html: description}}
-              style={{marginBottom: '50px'}}
+              className="pad-bottom"
             />
           </Box>
         </Box>

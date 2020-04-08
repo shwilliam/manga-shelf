@@ -1,5 +1,6 @@
 import React from 'react'
-import {VariableSizeList as List} from 'react-window'
+import {FixedSizeList as List} from 'react-window'
+import AutoSizer from 'react-virtualized-auto-sizer'
 import {Box} from 'grommet'
 import {MangaListItem} from './'
 
@@ -9,17 +10,21 @@ export const MangaList = ({loading, error, data}) => {
   if (!data.mangas.length) return <p>Nothing found</p>
 
   return (
-    <Box gap="medium" width="large" align="center">
-      <List
-        height={400}
-        itemCount={data.mangas.length}
-        itemSize={() => 200}
-        width="100%"
-      >
-        {({index, style}) => (
-          <MangaListItem style={style} data={data.mangas[index]} />
+    <Box className="site-content-container" fill="horizontal">
+      <AutoSizer>
+        {({width, height}) => (
+          <List
+            height={height}
+            width={width}
+            itemCount={data.mangas.length}
+            itemSize={220}
+          >
+            {({index, style}) => (
+              <MangaListItem style={style} data={data.mangas[index]} />
+            )}
+          </List>
         )}
-      </List>
+      </AutoSizer>
     </Box>
   )
 }

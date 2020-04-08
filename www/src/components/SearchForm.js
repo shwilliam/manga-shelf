@@ -17,13 +17,9 @@ export const SearchForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Box direction="row" justify="end" style={{position: 'relative'}}>
+      <Box direction="row" justify="end" className="relative">
         {isSearching && (
-          <Box
-            direction="row"
-            // TODO: move to stylesheet
-            style={{position: 'absolute', top: '-50%', right: '4rem'}}
-          >
+          <Box direction="row" className="site-search-container">
             <label>
               <span className="sr-only">Search for manga</span>
               <TextInput

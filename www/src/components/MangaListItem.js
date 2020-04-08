@@ -63,7 +63,7 @@ export const MangaListItem = ({data, style}) => {
 
         <Button
           size="small"
-          style={{marginBottom: '2rem'}}
+          className="pad-bottom"
           primary
           alignSelf="start"
           onClick={() => history.push(`/${data._id}`)}
