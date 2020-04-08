@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom'
 import {Button, Box, Text, Image} from 'grommet'
 import {Previous, Next} from 'grommet-icons'
 import {useChapters, useLocalChaptersProgress, useScroll} from '../hooks'
+import {Loader} from './'
 
 export const Read = () => {
   const {id} = useParams()
@@ -33,7 +34,7 @@ export const Read = () => {
     resetScroll()
   }, [activePage, resetScroll])
 
-  if (loading) return <p>Loading...</p>
+  if (loading) return <Loader />
   if (error) return <p>Error :(</p>
   if (!data) return null
 

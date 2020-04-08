@@ -4,6 +4,7 @@ import {List, Text, Heading, Box, Image} from 'grommet'
 import {FormView, Checkmark, LinkPrevious} from 'grommet-icons'
 import {useManga, useLocalChaptersProgress} from '../hooks'
 import {timestampToHumanReadable} from '../utils'
+import {Loader} from './'
 
 export const MangaDetails = () => {
   const [chaptersProgress, updateProgress] = useLocalChaptersProgress()
@@ -16,7 +17,7 @@ export const MangaDetails = () => {
     updateProgress(e.item, 'IN_PROGRESS')
   }
 
-  if (loading) return <p>Loading...</p>
+  if (loading) return <Loader />
   if (error) return <p>Error :(</p>
   if (!data) return null // FIXME
 

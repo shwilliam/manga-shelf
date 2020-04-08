@@ -2,10 +2,10 @@ import React from 'react'
 import {FixedSizeList as List} from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import {Box} from 'grommet'
-import {MangaListItem} from './'
+import {MangaListItem, Loader} from './'
 
 export const MangaList = ({loading, error, data}) => {
-  if (loading) return <p>Loading...</p>
+  if (loading) return <Loader />
   if (error) return <p>Error :(</p>
   if (!data.mangas.length) return <p>Nothing found</p>
 
