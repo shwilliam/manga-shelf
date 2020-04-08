@@ -2,13 +2,15 @@ import React, {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import {Button, Box, Text, Image} from 'grommet'
 import {Previous, Next} from 'grommet-icons'
-import {useChapters, useLocalChaptersProgress} from '../hooks'
+import {useChapters, useLocalChaptersProgress, useScroll} from '../hooks'
 
 export const Read = () => {
   const {id} = useParams()
   const [chaptersProgress, updateProgress] = useLocalChaptersProgress()
+  const {resetScroll} = useScroll()
 
   const {loading, error, data} = useChapters(id)
+  // TODO: track page progress and set on chapter open
   const [activePage, setActivePage] = useState(0)
   const sortedImages = data?.images.sort(([pageA], [pageB]) => pageA - pageB)
 
@@ -26,6 +28,10 @@ export const Read = () => {
   const nextPage = () =>
     setActivePage(s => (s < sortedImages.length - 1 ? s + 1 : s))
   const prevPage = () => setActivePage(s => (s > 0 ? s - 1 : s))
+
+  useEffect(() => {
+    resetScroll()
+  }, [activePage, resetScroll])
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
