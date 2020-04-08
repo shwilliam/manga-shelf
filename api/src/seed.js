@@ -66,11 +66,11 @@ const seed = async () => {
     console.log(
       `Created ${mangasToCreate.length} & updated ${mangasToUpdate.length} records`,
     )
-    return 1
   } catch (e) {
     console.error(`Error seeding mangas: ${e}`)
-    return 0
+    throw e
   }
+  return 1
 }
 
 module.exports = {seed}
