@@ -31,7 +31,13 @@ export const Read = () => {
   if (error) return <p>Error :(</p>
   if (!data) return null
 
-  const [page, path, width, height] = sortedImages[activePage]
+  const [
+    page,
+    path,
+    // width,
+    // height,
+  ] = sortedImages[activePage]
+
   return (
     <article>
       {/* TODO: dry up page action buttons */}
