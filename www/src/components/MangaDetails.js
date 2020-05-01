@@ -17,9 +17,8 @@ export const MangaDetails = () => {
     updateProgress(e.item, false)
   }
 
-  if (loading) return <Loader />
   if (error) return <p>Error :(</p>
-  if (!data) return null // FIXME
+  if (loading || !data) return <Loader />
 
   const {
     // aka,
