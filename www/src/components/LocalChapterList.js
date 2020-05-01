@@ -13,16 +13,12 @@ export const LocalChapterList = () => {
     () =>
       Object.entries(chaptersProgress).reduce(
         (acc, [id, chapter]) => {
-          switch (chapter.progress) {
-            case 'COMPLETE':
-              acc.complete.push({id, ...chapter})
-              return acc
-            case 'IN_PROGRESS':
-              acc.inProgress.push({id, ...chapter})
-              return acc
-            default:
-              break
+          if (chapter.done) {
+            acc.complete.push({id, ...chapter})
+          } else {
+            acc.inProgress.push({id, ...chapter})
           }
+          return acc
         },
         {inProgress: [], complete: []},
       ),

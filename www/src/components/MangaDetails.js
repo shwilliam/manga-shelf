@@ -14,7 +14,7 @@ export const MangaDetails = () => {
 
   const handleItemClick = e => {
     history.push(`/read/${e.item[3]}`)
-    updateProgress(e.item, 'IN_PROGRESS')
+    updateProgress(e.item, false)
   }
 
   if (loading) return <Loader />
@@ -103,7 +103,7 @@ export const MangaDetails = () => {
                 </Text>
                 <Box>
                   {chaptersProgress[chapterId] ? (
-                    chaptersProgress[chapterId].progress === 'COMPLETE' ? (
+                    chaptersProgress[chapterId].done ? (
                       <Checkmark />
                     ) : (
                       <FormView />

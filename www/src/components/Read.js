@@ -11,21 +11,19 @@ export const Read = () => {
   const {resetScroll} = useScroll()
 
   const {loading, error, data} = useChapters(id)
-  // TODO: track page progress and set on chapter open
-  const [activePage, setActivePage] = useState(0)
+  const [activePage, setActivePage] = useState(chaptersProgress[id]?.page ?? 0)
   const sortedImages = data?.images.sort(([pageA], [pageB]) => pageA - pageB)
 
   useEffect(() => {
-    if (
-      sortedImages &&
-      activePage === sortedImages.length - 1 &&
-      chaptersProgress[id].progress !== 'COMPLETE'
-    ) {
-      updateProgress(id, 'COMPLETE')
+    if (sortedImages && chaptersProgress[id]?.page !== activePage) {
+      updateProgress(
+        id,
+        chaptersProgress[id].done || activePage === sortedImages.length - 1,
+        activePage,
+      )
     }
   }, [activePage, id, sortedImages, updateProgress, chaptersProgress])
 
-  // TODO: scroll to top on page change
   const nextPage = () =>
     setActivePage(s => (s < sortedImages.length - 1 ? s + 1 : s))
   const prevPage = () => setActivePage(s => (s > 0 ? s - 1 : s))
